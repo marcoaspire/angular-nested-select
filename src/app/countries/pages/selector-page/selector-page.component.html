@@ -1,0 +1,61 @@
+<h1>Selects</h1>
+<hr>
+
+<form action="" [formGroup]="myForm" (ngSubmit)="save()">
+  <!-- Region -->
+  <div class="row mt-3">
+    <div class="col">
+      <label class="form-label">Continent</label>
+      <select class="form-control" formControlName="region">
+        <option value="">Select one</option>
+        <option *ngFor="let region of regions"
+
+          [value]="region|lowercase">
+          {{region}}
+        </option>
+
+      </select>
+    </div>
+  </div>
+  <!-- Country -->
+  <div class="row mt-3" *ngIf="countries.length !== 0">
+    <div class="col">
+      <label class="form-label">Country</label>
+      <select class="form-control" formControlName="country">
+        <option value="">Select one</option>
+        <option *ngFor="let country of countries" [value]="country.cca2">{{country.name.common}}</option>
+
+      </select>
+    </div>
+  </div>
+<!-- Borders -->
+<div class="row mt-3" *ngIf="borders.length > 0">
+  <div class="col">
+    <label class="form-label">Borders</label>
+    <select class="form-control" formControlName="borders">
+      <option value="">Select one</option>
+      <option *ngFor="let border of borders" [value]="border.cca2">{{border.name.common}}</option>
+
+    </select>
+  </div>
+</div>
+<div class="row" *ngIf="loading">
+  <div class="col">
+    <div class="alert alert-primary">
+      Loading..
+
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary float-end" type="submit">Send</button>
+    </div>
+  </div>
+</form>
+
+<pre>{{myForm.valid}}</pre>
+<pre>{{myForm.value| json}}</pre>
